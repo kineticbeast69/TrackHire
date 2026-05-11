@@ -1,8 +1,7 @@
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { auth, getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 export default async function DashboardLayout({ children }) {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const session = await getSession();
   if (!session?.user) {
     redirect("/sign-in");
   }
