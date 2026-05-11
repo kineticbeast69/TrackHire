@@ -10,6 +10,7 @@ import {
   FileText,
   StickyNote,
   Loader2,
+  AlertCircle,
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
@@ -93,10 +94,16 @@ export default function CreateJobApplicationDialog({
                 </Label>
                 <Input
                   id="company"
-                  required
                   placeholder="e.g. Google"
                   className="h-10 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary/20 text-sm"
+                  {...register("company")}
                 />
+                {errors.company && (
+                  <p className="flex items-center gap-1.5 text-xs text-red-500">
+                    <AlertCircle className="h-3 w-3 shrink-0" />
+                    {errors.company.message}
+                  </p>
+                )}
               </div>
               <div className="space-y-1.5">
                 <Label
@@ -108,10 +115,16 @@ export default function CreateJobApplicationDialog({
                 </Label>
                 <Input
                   id="position"
-                  required
                   placeholder="e.g. Frontend Engineer"
                   className="h-10 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary/20 text-sm"
+                  {...register("position")}
                 />
+                {errors.position && (
+                  <p className="flex items-center gap-1.5 text-xs text-red-500">
+                    <AlertCircle className="h-3 w-3 shrink-0" />
+                    {errors.position.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -129,7 +142,14 @@ export default function CreateJobApplicationDialog({
                   id="location"
                   placeholder="e.g. Remote / New York"
                   className="h-10 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary/20 text-sm"
+                  {...register("location")}
                 />
+                {errors.location && (
+                  <p className="flex items-center gap-1.5 text-xs text-red-500">
+                    <AlertCircle className="h-3 w-3 shrink-0" />
+                    {errors.location.message}
+                  </p>
+                )}
               </div>
               <div className="space-y-1.5">
                 <Label
@@ -143,7 +163,14 @@ export default function CreateJobApplicationDialog({
                   id="salary"
                   placeholder="e.g. $100k – $150k"
                   className="h-10 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary/20 text-sm"
+                  {...register("salary")}
                 />
+                {errors.salary && (
+                  <p className="flex items-center gap-1.5 text-xs text-red-500">
+                    <AlertCircle className="h-3 w-3 shrink-0" />
+                    {errors.salary.message}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -161,7 +188,14 @@ export default function CreateJobApplicationDialog({
                 type="url"
                 placeholder="https://jobs.example.com/frontend-engineer"
                 className="h-10 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary/20 text-sm"
+                {...register("jobUrl")}
               />
+              {errors.jobUrl && (
+                <p className="flex items-center gap-1.5 text-xs text-red-500">
+                  <AlertCircle className="h-3 w-3 shrink-0" />
+                  {errors.jobUrl.message}
+                </p>
+              )}
             </div>
 
             {/* Tags */}
@@ -180,7 +214,14 @@ export default function CreateJobApplicationDialog({
                 id="tags"
                 placeholder="React, Tailwind, High Pay, Startup"
                 className="h-10 rounded-lg border-gray-200 focus:ring-2 focus:ring-primary/20 text-sm"
+                {...register("tags")}
               />
+              {errors.tags && (
+                <p className="flex items-center gap-1.5 text-xs text-red-500">
+                  <AlertCircle className="h-3 w-3 shrink-0" />
+                  {errors.tags.message}
+                </p>
+              )}
             </div>
 
             {/* Description */}
@@ -190,14 +231,21 @@ export default function CreateJobApplicationDialog({
                 className="text-sm font-medium text-gray-700 flex items-center gap-1.5"
               >
                 <FileText className="h-3.5 w-3.5 text-muted-foreground" />
-                Notes
+                Description
               </Label>
               <Textarea
                 id="description"
                 rows={3}
                 placeholder="Brief description of the role and responsibilities..."
                 className="rounded-lg border-gray-200 focus:ring-2 focus:ring-primary/20 text-sm resize-none"
+                {...register("description")}
               />
+              {errors.description && (
+                <p className="flex items-center gap-1.5 text-xs text-red-500">
+                  <AlertCircle className="h-3 w-3 shrink-0" />
+                  {errors.description.message}
+                </p>
+              )}
             </div>
 
             {/* Notes */}
@@ -214,7 +262,14 @@ export default function CreateJobApplicationDialog({
                 rows={3}
                 placeholder="Any personal notes, referrals, or follow-up reminders..."
                 className="rounded-lg border-gray-200 focus:ring-2 focus:ring-primary/20 text-sm resize-none"
+                {...register("notes")}
               />
+              {errors.notes && (
+                <p className="flex items-center gap-1.5 text-xs text-red-500">
+                  <AlertCircle className="h-3 w-3 shrink-0" />
+                  {errors.notes.message}
+                </p>
+              )}
             </div>
           </div>
 
