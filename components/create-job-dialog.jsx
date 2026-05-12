@@ -29,19 +29,15 @@ import {
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
-
-export default function CreateJobApplicationDialog({
-  columnId,
-  boardId,
-  onCreate,
-}) {
+import { useState } from "react";
+export default function CreateJobApplicationDialog({ columnId, boardId }) {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(jobSchema) });
-
+  const [open, setOpen] = useState(false);
   const addJobSubmit = async (data) => {
     try {
       console.log(data);
@@ -50,7 +46,7 @@ export default function CreateJobApplicationDialog({
     }
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="ghost"
@@ -278,6 +274,7 @@ export default function CreateJobApplicationDialog({
             <Button
               type="button"
               variant="outline"
+              onClick={() => setOpen(false)}
               className="w-full sm:w-auto rounded-lg border-gray-200 text-gray-700 hover:bg-gray-100 h-10"
             >
               Cancel
