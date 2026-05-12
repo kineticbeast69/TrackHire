@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { DropdownMenu } from "./ui/dropdown-menu";
+import JobApplicationCard from "./job-application-card";
 import {
   DropdownMenuContent,
   DropdownMenuItem,
@@ -45,7 +46,16 @@ const defaultColumn = {
   icon: <Calendar className="h-4 w-4" />,
 };
 
-function DropableColumn({ column, config, boardId }) {
+function SortedJobCard({ jobs, columns }) {
+  return (
+    <div>
+      <JobApplicationCard jobs={jobs} columns={columns} />
+    </div>
+  );
+}
+
+function DropableColumn({ column, config, boardId, jobs, sortedColumns }) {
+  const sortedJobs = jobs?.sort((a, b) => a.order - b.order) || [];
   return (
     <Card className="min-w-[300px] flex-shrink-0 shadow-md p-0">
       <CardHeader className={`${config.color} text-white rounded-lg pb-3 pt-3`}>
@@ -78,13 +88,25 @@ function DropableColumn({ column, config, boardId }) {
 
       {/* card content */}
       <CardContent className="space-y-2 pt-4 bg-gray-50?50 min-h-[400px] rounded-b-lg">
+        {/* sorted jobs */}
+        {sortedJobs.map((job, index) => {
+          return (
+            <SortedJobCard
+              key={index}
+              jobs={{ ...job, columnId: job.columnId }}
+              columns={sortedColumns}
+            />
+          );
+        })}
+        {/* add job component */}
         <CreateJobApplicationDialog boardId={boardId} columnId={column.id} />
       </CardContent>
     </Card>
   );
 }
 
-export default function KabanBoard({ session, board, columns }) {
+export default function KabanBoard({ board, columns, jobs }) {
+  const sortedColumns = columns.sort((a, b) => a.order - b.order);
   return (
     <>
       <div>
@@ -95,8 +117,10 @@ export default function KabanBoard({ session, board, columns }) {
               <DropableColumn
                 key={index}
                 column={col}
+                jobs={jobs}
                 config={config}
                 boardId={board.id}
+                sortedColumns={sortedColumns}
               />
             );
           })}
