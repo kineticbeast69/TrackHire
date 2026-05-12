@@ -28,6 +28,7 @@ import {
 } from "./ui/dialog";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import { createJobApplication } from "@/lib/action/createJobApplication";
 import { Textarea } from "./ui/textarea";
 import { useState } from "react";
 export default function CreateJobApplicationDialog({ columnId, boardId }) {
@@ -40,7 +41,12 @@ export default function CreateJobApplicationDialog({ columnId, boardId }) {
   const [open, setOpen] = useState(false);
   const addJobSubmit = async (data) => {
     try {
-      console.log(data);
+      const result = await createJobApplication(data, boardId, columnId);
+      if (result.success) {
+        toast.success("Job added succesfully.");
+      } else {
+        console.log(result.error);
+      }
     } catch (error) {
       throw error;
     }

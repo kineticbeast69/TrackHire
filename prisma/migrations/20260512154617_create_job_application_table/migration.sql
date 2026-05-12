@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "JobApplication" ALTER COLUMN "appliedDate" SET DEFAULT CURRENT_TIMESTAMP;

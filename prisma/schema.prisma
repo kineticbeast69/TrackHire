@@ -118,7 +118,7 @@ model JobApplication {
   notes       String?
   salary      String?
   jobUrl      String?
-  appliedDate DateTime?
+  appliedDate DateTime  @default(now())
   tags        String[]
   description String?
   createdAt   DateTime  @default(now())
