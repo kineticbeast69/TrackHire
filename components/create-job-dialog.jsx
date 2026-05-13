@@ -16,6 +16,7 @@ import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
 import jobSchema from "@/lib/validation/addJob.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import {
   Dialog,
@@ -34,6 +35,7 @@ import React, { useState } from "react";
 
 const CreateJobApplicationDialog = React.memo(
   function CreateJobApplicationDialog({ columnId, boardId }) {
+    const router = useRouter();
     const {
       register,
       handleSubmit,
@@ -45,7 +47,9 @@ const CreateJobApplicationDialog = React.memo(
       try {
         const result = await createJobApplication(data, boardId, columnId);
         if (result.success) {
+          reset();
           toast.success("Job added succesfully.");
+          router.refresh();
         } else {
           console.log(result.error);
         }
