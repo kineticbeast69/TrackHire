@@ -9,8 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-
-export default function JobApplicationCard({ jobs, columns }) {
+import React from "react";
+const JobApplicationCard = React.memo(function JobApplicationCard({
+  jobs,
+  columns,
+}) {
   // console.log(jobs);
   return (
     <>
@@ -44,6 +47,7 @@ export default function JobApplicationCard({ jobs, columns }) {
                   href={jobs.jobUrl}
                 >
                   <ExternalLink className="h-3 w-3" />
+                  View Job Posting
                 </a>
               )}
             </div>
@@ -82,4 +86,5 @@ export default function JobApplicationCard({ jobs, columns }) {
       </Card>
     </>
   );
-}
+});
+export default JobApplicationCard;

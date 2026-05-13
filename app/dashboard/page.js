@@ -11,7 +11,7 @@ export default async function DashboardPage() {
       jobApplications: true,
     },
   });
-  console.log(board);
+  // console.log(board);
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto p-6">

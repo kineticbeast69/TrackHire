@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Briefcase, LogOut, Menu, X, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,7 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { toast } from "react-toastify";
-export default function Navbar() {
+const Navbar = React.memo(function Navbar() {
   const router = useRouter();
   const { data: session, isPending } = useSession(); // 👈 reactive session
   const [menuOpen, setMenuOpen] = useState(false);
@@ -204,4 +204,5 @@ export default function Navbar() {
       </nav>
     </header>
   );
-}
+});
+export default Navbar;
