@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { DropdownMenu } from "./ui/dropdown-menu";
+import { useBoard } from "@/lib/hooks/useBoard";
 import React from "react";
 import JobApplicationCard from "./job-application-card";
 import {
@@ -156,6 +157,7 @@ const DropableColumn = React.memo(function DropableColumn({
   );
 });
 const KabanBoard = React.memo(function KabanBoard({ board, columns, jobs }) {
+  // const { columns, moveJob } = useBoard(board);
   const sortedColumns = useMemo(
     () => [...columns].sort((a, b) => a.order - b.order),
     [columns],
